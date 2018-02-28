@@ -1,0 +1,42 @@
+{
+  "name": "task-15-5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "init-project": "npm install && npm-run-all init:*",
+    "init:dirs": "mkdirp sass css vendor images js",
+    "init:files": "touch README.md index.html sass/style.scss js/script.js",
+    "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "test": "npm-run-all test:*",
+    "test:html": "globstar nu-html-checker *.html",
+    "test:js": "globstar jshint js/*.js",
+    "build": "npm-run-all build:* test",
+    "build:clean": "rm -rf css/",
+    "build:sass": "node-sass --output-style compact -o css sass",
+    "build:autoprefixer": "autoprefixer-cli css/style.css",
+    "build-dev:sass": "node-sass --output-style expanded --source-map true -o css sass",
+    "watch": "npm-run-all build -p watch:*",
+    "helper": "npm run build-dev:sass && npm run build:autoprefixer",
+    "watch:sassprefixer": "onchange -d 100 sass/ -- npm run helper",
+    "watch:browser-sync": "browser-sync start --server --files css/*.css *.html --browser \"chrome\"",
+    "start": "http-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer-cli": "^1.0.0",
+    "babel-polyfill": "^6.26.0",
+    "browser-sync": "^2.23.5",
+    "globstar": "^1.0.0",
+    "http-server": "^0.11.1",
+    "jshint": "^2.9.5",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2",
+    "nu-html-checker": "^0.1.0",
+    "onchange": "^3.3.0",
+    "rimraf": "^2.6.2"
+  }
+}
