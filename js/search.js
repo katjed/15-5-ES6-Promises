@@ -1,4 +1,4 @@
-search = React.createClass({
+Search = React.createClass({
     getInitialState() {
         return {
             searchingText: ''

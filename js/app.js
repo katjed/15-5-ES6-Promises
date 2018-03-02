@@ -1,4 +1,4 @@
-app = React.createClass({
+App = React.createClass({
     getInitialState() {
         return {
             loading: false,
@@ -11,17 +11,19 @@ app = React.createClass({
         this.setState({
             loading: true  // 2.
         });
+        var self = this;
 
         this.getGif(searchingText)
         .then(function(gif) {  // 3.
-            this.setState({  // 4
+            self.setState({  // 4
                 loading: false,  // a
                 gif: gif,  // b
                 searchingText: searchingText  // c
             })
-        .catch(function(error)) {
+        })
+        .catch(function(error) {
             console.error(error);
-        }
+        })
     },
 
     getGif: function(searchingText, callback) {  // 1.
